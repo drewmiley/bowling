@@ -1,4 +1,7 @@
-trait BowlingFrame
+trait BowlingFrame {
+  def scores: List[Int]
+  def isComplete: Boolean
+}
 
 case class NotLastFrame(scores: List[Int]) extends BowlingFrame {
   def isStrike: Boolean = scores.length == 1 && scores.head == 10
@@ -12,9 +15,29 @@ case class LastFrame(scores: List[Int]) extends BowlingFrame {
 }
 
 object Bowling {
+
+  private def getNumericalValueFromScoreAndLastFrame(lastOptionFrame: Option[BowlingFrame], score: String): Int = {
+    (lastOptionFrame, score) match {
+      case (_, "X") => 10
+      case (Some(frame), "/") => 10 - frame.scores.last
+      case (_, intValue) => intValue.toInt
+    }
+  }
+
   def frames(individualScores: List[String]): List[BowlingFrame] = {
     individualScores.foldLeft(List.empty[BowlingFrame])((acc, d) => {
-      acc
+      val numericalValue: Int = getNumericalValueFromScoreAndLastFrame(acc.lastOption, d)
+      (acc.lastOption, acc.length) match {
+        case (Some(notLastFrame: NotLastFrame), accLength) =>
+          if (notLastFrame.isComplete) {
+            val newFrame = if (accLength == 9) LastFrame(List(numericalValue)) else NotLastFrame(List(numericalValue))
+            acc :+ newFrame
+          } else {
+            acc.init ++ List(NotLastFrame(notLastFrame.scores :+ numericalValue))
+          }
+        case (Some(lastFrame: LastFrame), 10) => acc.init ++ List(LastFrame(lastFrame.scores :+ numericalValue))
+        case (None, 0) => List(NotLastFrame(List(numericalValue)))
+      }
     })
   }
 

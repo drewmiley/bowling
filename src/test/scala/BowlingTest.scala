@@ -172,7 +172,7 @@ class BowlingTest extends AnyFunSuite {
       NotLastFrame(List(10)),
       NotLastFrame(List(10)),
       NotLastFrame(List(6, 3)),
-      NotLastFrame(List(4))
+      LastFrame(List(4))
     )
     assert(Bowling.frames(frames) == expected)
   }
@@ -188,7 +188,7 @@ class BowlingTest extends AnyFunSuite {
       NotLastFrame(List(10)),
       NotLastFrame(List(10)),
       NotLastFrame(List(6, 3)),
-      NotLastFrame(List(4, 6))
+      LastFrame(List(4, 6))
     )
     assert(Bowling.frames(frames) == expected)
   }
@@ -204,7 +204,7 @@ class BowlingTest extends AnyFunSuite {
       NotLastFrame(List(10)),
       NotLastFrame(List(10)),
       NotLastFrame(List(6, 3)),
-      NotLastFrame(List(4, 6, 10))
+      LastFrame(List(4, 6, 10))
     )
     assert(Bowling.frames(frames) == expected)
   }
@@ -462,7 +462,7 @@ class BowlingTest extends AnyFunSuite {
       NotLastFrame(List(10)),
       NotLastFrame(List(10)),
       NotLastFrame(List(6, 3)),
-      NotLastFrame(List(4))
+      LastFrame(List(4))
     )
     val expected = List(
       Some(8),
@@ -489,7 +489,7 @@ class BowlingTest extends AnyFunSuite {
       NotLastFrame(List(10)),
       NotLastFrame(List(10)),
       NotLastFrame(List(6, 3)),
-      NotLastFrame(List(4, 6))
+      LastFrame(List(4, 6))
     )
     val expected = List(
       Some(8),
@@ -516,7 +516,7 @@ class BowlingTest extends AnyFunSuite {
       NotLastFrame(List(10)),
       NotLastFrame(List(10)),
       NotLastFrame(List(6, 3)),
-      NotLastFrame(List(4, 6, 10))
+      LastFrame(List(4, 6, 10))
     )
     val expected = List(
       Some(8),
