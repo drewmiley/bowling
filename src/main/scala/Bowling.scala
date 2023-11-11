@@ -12,7 +12,15 @@ case class LastFrame(scores: List[Int]) extends BowlingFrame {
 }
 
 object Bowling {
-  def frames(individualScores: List[String]): List[BowlingFrame] = ???
+  def frames(individualScores: List[String]): List[BowlingFrame] = {
+    individualScores.foldLeft(List.empty[BowlingFrame])((acc, d) => {
+      acc
+    })
+  }
 
-  def scores(frames: List[BowlingFrame]): List[Option[Int]] = ???
+  def scores(frames: List[BowlingFrame]): List[Option[Int]] = {
+    frames.foldLeft(List.empty[Option[Int]])((acc, d) => {
+      acc
+    })
+  }
 }
