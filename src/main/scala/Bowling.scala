@@ -42,6 +42,8 @@ object Bowling {
   }
 
   def scores(frames: List[BowlingFrame]): List[Option[Int]] = {
+//    val initialScores = if (frames.length == 1) List.empty else scores(frames.init)
+//    initialScores :+ (if (frames.last.isComplete) initialScores.last.map(_ + frames.last.scores.sum) else None)
     frames.foldLeft(List.empty[Option[Int]])((acc, d) => {
       if (d.isComplete) {
         val newScore = if (acc.isEmpty) Some(d.scores.sum) else acc.last.map(a => a + d.scores.sum)
