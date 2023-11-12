@@ -41,16 +41,15 @@ object Bowling {
     })
   }
 
+  private def getScoresFromFrame(frames: List[BowlingFrame])(bowlingFrame: BowlingFrame): Option[Int] = {
+    if (bowlingFrame.isComplete) Option(bowlingFrame.scores.sum) else None
+  }
+
   def scores(frames: List[BowlingFrame]): List[Option[Int]] = {
-//    val initialScores = if (frames.length == 1) List.empty else scores(frames.init)
-//    initialScores :+ (if (frames.last.isComplete) initialScores.last.map(_ + frames.last.scores.sum) else None)
-    frames.foldLeft(List.empty[Option[Int]])((acc, d) => {
-      if (d.isComplete) {
-        val newScore = if (acc.isEmpty) Some(d.scores.sum) else acc.last.map(a => a + d.scores.sum)
-        acc :+ newScore
-      } else {
-        acc :+ None
-      }
+    val curriedScoresFromFrame: BowlingFrame => Option[Int] = getScoresFromFrame(frames)
+    val frameScores: List[Option[Int]] = frames.map(curriedScoresFromFrame)
+    frameScores.foldLeft(List.empty[Option[Int]])((acc, d) => {
+      if (acc.isEmpty) List(d) else acc :+ d.map(_ + acc.last.get)
     })
   }
 }
