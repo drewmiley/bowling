@@ -43,11 +43,13 @@ object Bowling {
 
   private def getScoreForCompleteNotLastFrame(notLastFrame: NotLastFrame, frameNumber: Int, frames: List[BowlingFrame]): Option[Int] = {
     val sumOfFrameScores = notLastFrame.scores.sum
-    (notLastFrame.isStrike, notLastFrame.isSpare) match {
-      case (false, false) => Option(sumOfFrameScores)
-//      TODO: IMPLEMENT BELOW
-      case (true, false) => None
-      case (false, true) => None
+    val subsequentScores = frames.drop(frameNumber + 1).flatMap(frame => frame.scores)
+    (notLastFrame.isStrike, notLastFrame.isSpare, subsequentScores) match {
+      case (false, false, _) => Option(sumOfFrameScores)
+      case (true, false, scores) if scores.length >= 2 => Option(sumOfFrameScores + scores.take(2).sum)
+      case (true, false, scores) if scores.length < 2 => None
+      case (false, true, scores) if scores.nonEmpty => Option(sumOfFrameScores + scores.take(1).sum)
+      case (false, true, scores) if scores.isEmpty => None
     }
   }
 
