@@ -41,13 +41,17 @@ object Bowling {
     })
   }
 
-  private def getScoresFromFrame(frames: List[BowlingFrame])(bowlingFrame: BowlingFrame): Option[Int] = {
+  private def getScoresFromFrame(frames: List[BowlingFrame])(bfInt: (BowlingFrame, Int)): Option[Int] = {
+    val bowlingFrame = bfInt._1
+    val frameNumber = bfInt._2
     if (bowlingFrame.isComplete) Option(bowlingFrame.scores.sum) else None
   }
 
   def scores(frames: List[BowlingFrame]): List[Option[Int]] = {
-    val curriedScoresFromFrame: BowlingFrame => Option[Int] = getScoresFromFrame(frames)
-    val frameScores: List[Option[Int]] = frames.map(curriedScoresFromFrame)
+    val curriedScoresFromFrame: (BowlingFrame, Int) => Option[Int] = getScoresFromFrame(frames)
+//    Get zipWithIndex
+    val frameScores: List[Option[Int]] = frames.zipWithIndex.map(a => curriedScoresFromFrame(a._1, a._2))
+//    Can below use reduceLeft?
     frameScores.foldLeft(List.empty[Option[Int]])((acc, d) => {
       if (acc.isEmpty) List(d) else acc :+ d.map(_ + acc.last.get)
     })
