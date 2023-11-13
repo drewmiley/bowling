@@ -12,20 +12,20 @@ test("Bowling.frames 1 frame incomplete", () => {
     expect(Bowling.frames(frames)).toStrictEqual(expected);
 });
 
-  // test("Bowling.frames 1 frame complete", () => {
-  //   const frames = ["6", "2")
-  //   const expected = [
-  //     NotLastFrame([6, 2))
-  //   )
-  //   assert(Bowling.frames(frames)).toStrictEqual(expected)
-  // }
+test("Bowling.frames 1 frame complete", () => {
+    const frames = ["6", "2"]
+    const expected = [
+      NotLastFrame([6, 2])
+    ];
+    expect(Bowling.frames(frames)).toStrictEqual(expected)
+});
   // test("Bowling.frames 2 frames incomplete", () => {
   //   const frames = ["6", "2", "7")
   //   const expected = [
   //     NotLastFrame([6, 2]),
   //     NotLastFrame([7))
   //   )
-  //   assert(Bowling.frames(frames)).toStrictEqual(expected)
+  //   expect(Bowling.frames(frames)).toStrictEqual(expected)
   // }
   // test("Bowling.frames 2 frames complete", () => {
   //   const frames = ["6", "2", "7", "2")
@@ -33,7 +33,7 @@ test("Bowling.frames 1 frame incomplete", () => {
   //     NotLastFrame([6, 2]),
   //     NotLastFrame([7, 2))
   //   )
-  //   assert(Bowling.frames(frames)).toStrictEqual(expected)
+  //   expect(Bowling.frames(frames)).toStrictEqual(expected)
   // }
   // test("Bowling.frames 3 frames incomplete", () => {
   //   const frames = ["6", "2", "7", "2", "3")
@@ -42,7 +42,7 @@ test("Bowling.frames 1 frame incomplete", () => {
   //     NotLastFrame([7, 2]),
   //     NotLastFrame([3))
   //   )
-  //   assert(Bowling.frames(frames)).toStrictEqual(expected)
+  //   expect(Bowling.frames(frames)).toStrictEqual(expected)
   // }
   // test("Bowling.frames 3 frames complete", () => {
   //   const frames = ["6", "2", "7", "2", "3", "4")
@@ -51,7 +51,7 @@ test("Bowling.frames 1 frame incomplete", () => {
   //     NotLastFrame([7, 2]),
   //     NotLastFrame([3, 4))
   //   )
-  //   assert(Bowling.frames(frames)).toStrictEqual(expected)
+  //   expect(Bowling.frames(frames)).toStrictEqual(expected)
   // }
   // test("Bowling.frames 4 frames incomplete", () => {
   //   const frames = ["6", "2", "7", "2", "3", "4", "8")
@@ -61,7 +61,7 @@ test("Bowling.frames 1 frame incomplete", () => {
   //     NotLastFrame([3, 4]),
   //     NotLastFrame([8))
   //   )
-  //   assert(Bowling.frames(frames)).toStrictEqual(expected)
+  //   expect(Bowling.frames(frames)).toStrictEqual(expected)
   // }
   // test("Bowling.frames 4 frames complete", () => {
   //   const frames = ["6", "2", "7", "2", "3", "4", "8", "/")
@@ -71,7 +71,7 @@ test("Bowling.frames 1 frame incomplete", () => {
   //     NotLastFrame([3, 4]),
   //     NotLastFrame([8, 2))
   //   )
-  //   assert(Bowling.frames(frames)).toStrictEqual(expected)
+  //   expect(Bowling.frames(frames)).toStrictEqual(expected)
   // }
   // test("Bowling.frames 5 frames incomplete", () => {
   //   const frames = ["6", "2", "7", "2", "3", "4", "8", "/", "9")
@@ -82,7 +82,7 @@ test("Bowling.frames 1 frame incomplete", () => {
   //     NotLastFrame([8, 2]),
   //     NotLastFrame([9))
   //   )
-  //   assert(Bowling.frames(frames)).toStrictEqual(expected)
+  //   expect(Bowling.frames(frames)).toStrictEqual(expected)
   // }
   // test("Bowling.frames 5 frames complete", () => {
   //   const frames = ["6", "2", "7", "2", "3", "4", "8", "/", "9", "0")
@@ -93,7 +93,7 @@ test("Bowling.frames 1 frame incomplete", () => {
   //     NotLastFrame([8, 2]),
   //     NotLastFrame([9, 0))
   //   )
-  //   assert(Bowling.frames(frames)).toStrictEqual(expected)
+  //   expect(Bowling.frames(frames)).toStrictEqual(expected)
   // }
   // test("Bowling.frames 6 frames complete", () => {
   //   const frames = ["6", "2", "7", "2", "3", "4", "8", "/", "9", "0", "X")
@@ -105,7 +105,7 @@ test("Bowling.frames 1 frame incomplete", () => {
   //     NotLastFrame([9, 0]),
   //     NotLastFrame([10))
   //   )
-  //   assert(Bowling.frames(frames)).toStrictEqual(expected)
+  //   expect(Bowling.frames(frames)).toStrictEqual(expected)
   // }
   // test("Bowling.frames 7 frames complete", () => {
   //   const frames = ["6", "2", "7", "2", "3", "4", "8", "/", "9", "0", "X", "X")
@@ -118,7 +118,7 @@ test("Bowling.frames 1 frame incomplete", () => {
   //     NotLastFrame([10]),
   //     NotLastFrame([10))
   //   )
-  //   assert(Bowling.frames(frames)).toStrictEqual(expected)
+  //   expect(Bowling.frames(frames)).toStrictEqual(expected)
   // }
   // test("Bowling.frames 8 frames complete", () => {
   //   const frames = ["6", "2", "7", "2", "3", "4", "8", "/", "9", "0", "X", "X", "X")
@@ -132,7 +132,7 @@ test("Bowling.frames 1 frame incomplete", () => {
   //     NotLastFrame([10]),
   //     NotLastFrame([10))
   //   )
-  //   assert(Bowling.frames(frames)).toStrictEqual(expected)
+  //   expect(Bowling.frames(frames)).toStrictEqual(expected)
   // }
   // test("Bowling.frames 9 frames incomplete", () => {
   //   const frames = ["6", "2", "7", "2", "3", "4", "8", "/", "9", "0", "X", "X", "X", "6")
@@ -147,7 +147,7 @@ test("Bowling.frames 1 frame incomplete", () => {
   //     NotLastFrame([10]),
   //     NotLastFrame([6))
   //   )
-  //   assert(Bowling.frames(frames)).toStrictEqual(expected)
+  //   expect(Bowling.frames(frames)).toStrictEqual(expected)
   // }
   // test("Bowling.frames 9 frames complete", () => {
   //   const frames = ["6", "2", "7", "2", "3", "4", "8", "/", "9", "0", "X", "X", "X", "6", "3")
@@ -162,7 +162,7 @@ test("Bowling.frames 1 frame incomplete", () => {
   //     NotLastFrame([10]),
   //     NotLastFrame([6, 3))
   //   )
-  //   assert(Bowling.frames(frames)).toStrictEqual(expected)
+  //   expect(Bowling.frames(frames)).toStrictEqual(expected)
   // }
   // test("Bowling.frames 10 frames incomplete 1") {
   //   const frames = ["6", "2", "7", "2", "3", "4", "8", "/", "9", "0", "X", "X", "X", "6", "3", "4")
@@ -178,7 +178,7 @@ test("Bowling.frames 1 frame incomplete", () => {
   //     NotLastFrame([6, 3]),
   //     LastFrame([4))
   //   )
-  //   assert(Bowling.frames(frames)).toStrictEqual(expected)
+  //   expect(Bowling.frames(frames)).toStrictEqual(expected)
   // }
   // test("Bowling.frames 10 frames incomplete 2") {
   //   const frames = ["6", "2", "7", "2", "3", "4", "8", "/", "9", "0", "X", "X", "X", "6", "3", "4", "/")
@@ -194,7 +194,7 @@ test("Bowling.frames 1 frame incomplete", () => {
   //     NotLastFrame([6, 3]),
   //     LastFrame([4, 6))
   //   )
-  //   assert(Bowling.frames(frames)).toStrictEqual(expected)
+  //   expect(Bowling.frames(frames)).toStrictEqual(expected)
   // }
   // test("Bowling.frames 10 frames complete", () => {
   //   const frames = ["6", "2", "7", "2", "3", "4", "8", "/", "9", "0", "X", "X", "X", "6", "3", "4", "/", "10")
@@ -210,5 +210,5 @@ test("Bowling.frames 1 frame incomplete", () => {
   //     NotLastFrame([6, 3]),
   //     LastFrame([4, 6, 10))
   //   )
-  //   assert(Bowling.frames(frames)).toStrictEqual(expected)
+  //   expect(Bowling.frames(frames)).toStrictEqual(expected)
   // }
