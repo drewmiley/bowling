@@ -12,31 +12,35 @@ const NotLastFrame = scores => {
         scores,
         isStrike,
         isSpare: scores.length == 2 && sum(scores) == 10,
-        isComplete: isStrike || scores.length == 2
+        isComplete: isStrike || scores.length == 2,
+        isNotLastFrame: true
     }
 };
 
 const LastFrame = scores => {
     return {
         scores,
-        isComplete: (scores.length == 2 && sum(scores) < 10) || scores.length == 3
+        isComplete: (scores.length == 2 && sum(scores) < 10) || scores.length == 3,
+        isNotLastFrame: false
     }
 };
 
 function frames(individualScores) {
-    // individualScores.foldLeft(List.empty[BowlingFrame])((acc, d) => {
-    //   val numericalValue: Int = getNumericalValueFromScoreAndLastFrame(acc.lastOption, d)
-    //   (acc.lastOption, acc.length) match {
-    //     case (Some(notLastFrame: NotLastFrame), 9) if notLastFrame.isComplete => acc :+ LastFrame(List(numericalValue))
-    //     case (Some(notLastFrame: NotLastFrame), _) if notLastFrame.isComplete => acc :+ NotLastFrame(List(numericalValue))
-    //     case (Some(notLastFrame: NotLastFrame), _) => acc.init ++ List(NotLastFrame(notLastFrame.scores :+ numericalValue))
-    //     case (Some(lastFrame: LastFrame), 10) => acc.init ++ List(LastFrame(lastFrame.scores :+ numericalValue))
-    //     case (None, 0) => List(NotLastFrame(List(numericalValue)))
-    //   }
-    // })
-    return [
-        NotLastFrame([6])
-    ];
+    return individualScores.reduce((acc, d) => {
+        const accLength = acc.length;
+        const lastFrameInAcc = acc.length ? acc[acc.length - 1] : null;
+        const numericalValue = getNumericalValueFromScoreAndLastFrame(lastFrameInAcc, d);
+        if (!lastFrameInAcc) return [NotLastFrame([numericalValue])];
+        if (lastFrameInAcc.isComplete) {
+            const newFrame = accLength == 9 ? LastFrame([numericalValue]) : NotLastFrame([numericalValue]);
+            return acc.concat([newFrame]);
+        } else {
+            const newScores = lastFrameInAcc.scores.concat([numericalValue]);
+            const newFrame = lastFrameInAcc.isNotLastFrame ? NotLastFrame(newScores) : LastFrame(newScores);
+            return acc.slice(0, -1).concat([newFrame]);
+        }
+
+    }, []);
 }
 
 const Bowling = {
