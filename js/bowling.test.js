@@ -9,7 +9,7 @@ test("Bowling.frames 1 frame incomplete", () => {
     const expected = [
         NotLastFrame([6])
     ];
-    expect(Bowling.frames(frames)).toBe(expected);
+    expect(Bowling.frames(frames)).toStrictEqual(expected);
 });
 
   // test("Bowling.frames 1 frame complete") {

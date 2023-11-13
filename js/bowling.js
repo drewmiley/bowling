@@ -12,7 +12,9 @@ function NotLastFrame(scores) {
 }
 
 function frames(individualScores) {
-    return [];
+    return [
+        NotLastFrame([6])
+    ];
 }
 
 const Bowling = {
