@@ -43,6 +43,41 @@ function frames(individualScores) {
     }, []);
 }
 
+  // private def getScoreForCompleteNotLastFrame(notLastFrame: NotLastFrame, subsequentFrames: List[BowlingFrame]): Option[Int] = {
+  //   val sumOfFrameScores = notLastFrame.scores.sum
+  //   (notLastFrame.isStrike, notLastFrame.isSpare, subsequentFrames.flatMap(frame => frame.scores)) match {
+  //     case (false, false, _) => Option(sumOfFrameScores)
+  //     case (true, false, scores) if scores.length >= 2 => Option(sumOfFrameScores + scores.take(2).sum)
+  //     case (true, false, scores) if scores.length < 2 => None
+  //     case (false, true, scores) if scores.nonEmpty => Option(sumOfFrameScores + scores.take(1).sum)
+  //     case (false, true, scores) if scores.isEmpty => None
+  //   }
+  // }
+
+  // private def getScoresFromFrame: List[BowlingFrame] => (BowlingFrame, Int) => Option[Int] = {
+  //   frames => (bowlingFrame, frameNumber) => {
+  //     (bowlingFrame, bowlingFrame.isComplete) match {
+  //       case (_, false) => None
+  //       case (_: LastFrame, true) => Option(bowlingFrame.scores.sum)
+  //       case (notLastFrame: NotLastFrame, true) => getScoreForCompleteNotLastFrame(notLastFrame, subsequentFrames = frames.drop(frameNumber + 1))
+  //     }
+  //   }
+  // }
+
+  // def scores(frames: List[BowlingFrame]): List[Option[Int]] = {
+  //   val curriedScoresFromFrame: (BowlingFrame, Int) => Option[Int] = getScoresFromFrame(frames)
+  //   val individualFrameScores: List[Option[Int]] = frames.zipWithIndex.map(d => curriedScoresFromFrame(d._1, d._2))
+  //   individualFrameScores.foldLeft(List.empty[Option[Int]])((acc, d) => {
+  //     if (acc.isEmpty) List(d) else {
+  //       val lastFrameScore = for {
+  //         totalLastScore <- acc.last
+  //         individualFrameScore <- d
+  //       } yield totalLastScore + individualFrameScore
+  //       acc :+ lastFrameScore
+  //     }
+  //   })
+  // }
+
 const Bowling = {
     frames
 };
