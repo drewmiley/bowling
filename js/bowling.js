@@ -43,6 +43,10 @@ function frames(individualScores) {
     }, []);
 }
 
+function scores(frames) {
+    return [];
+}
+
   // private def getScoreForCompleteNotLastFrame(notLastFrame: NotLastFrame, subsequentFrames: List[BowlingFrame]): Option[Int] = {
   //   val sumOfFrameScores = notLastFrame.scores.sum
   //   (notLastFrame.isStrike, notLastFrame.isSpare, subsequentFrames.flatMap(frame => frame.scores)) match {
@@ -79,7 +83,8 @@ function frames(individualScores) {
   // }
 
 const Bowling = {
-    frames
+    frames,
+    scores
 };
 
 exports.NotLastFrame = NotLastFrame;
