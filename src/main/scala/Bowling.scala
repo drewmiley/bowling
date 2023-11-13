@@ -28,23 +28,18 @@ object Bowling {
     individualScores.foldLeft(List.empty[BowlingFrame])((acc, d) => {
       val numericalValue: Int = getNumericalValueFromScoreAndLastFrame(acc.lastOption, d)
       (acc.lastOption, acc.length) match {
-        case (Some(notLastFrame: NotLastFrame), accLength) =>
-          if (notLastFrame.isComplete) {
-            val newFrame = if (accLength == 9) LastFrame(List(numericalValue)) else NotLastFrame(List(numericalValue))
-            acc :+ newFrame
-          } else {
-            acc.init ++ List(NotLastFrame(notLastFrame.scores :+ numericalValue))
-          }
+        case (Some(notLastFrame: NotLastFrame), 9) if notLastFrame.isComplete => acc :+ LastFrame(List(numericalValue))
+        case (Some(notLastFrame: NotLastFrame), _) if notLastFrame.isComplete => acc :+ NotLastFrame(List(numericalValue))
+        case (Some(notLastFrame: NotLastFrame), _) => acc.init ++ List(NotLastFrame(notLastFrame.scores :+ numericalValue))
         case (Some(lastFrame: LastFrame), 10) => acc.init ++ List(LastFrame(lastFrame.scores :+ numericalValue))
         case (None, 0) => List(NotLastFrame(List(numericalValue)))
       }
     })
   }
 
-  private def getScoreForCompleteNotLastFrame(notLastFrame: NotLastFrame, frameNumber: Int, frames: List[BowlingFrame]): Option[Int] = {
+  private def getScoreForCompleteNotLastFrame(notLastFrame: NotLastFrame, subsequentFrames: List[BowlingFrame]): Option[Int] = {
     val sumOfFrameScores = notLastFrame.scores.sum
-    val subsequentScores = frames.drop(frameNumber + 1).flatMap(frame => frame.scores)
-    (notLastFrame.isStrike, notLastFrame.isSpare, subsequentScores) match {
+    (notLastFrame.isStrike, notLastFrame.isSpare, subsequentFrames.flatMap(frame => frame.scores)) match {
       case (false, false, _) => Option(sumOfFrameScores)
       case (true, false, scores) if scores.length >= 2 => Option(sumOfFrameScores + scores.take(2).sum)
       case (true, false, scores) if scores.length < 2 => None
@@ -58,7 +53,7 @@ object Bowling {
       (bowlingFrame, bowlingFrame.isComplete) match {
         case (_, false) => None
         case (_: LastFrame, true) => Option(bowlingFrame.scores.sum)
-        case (notLastFrame: NotLastFrame, true) => getScoreForCompleteNotLastFrame(notLastFrame, frameNumber, frames)
+        case (notLastFrame: NotLastFrame, true) => getScoreForCompleteNotLastFrame(notLastFrame, subsequentFrames = frames.drop(frameNumber + 1))
       }
     }
   }
@@ -66,7 +61,6 @@ object Bowling {
   def scores(frames: List[BowlingFrame]): List[Option[Int]] = {
     val curriedScoresFromFrame: (BowlingFrame, Int) => Option[Int] = getScoresFromFrame(frames)
     val individualFrameScores: List[Option[Int]] = frames.zipWithIndex.map(d => curriedScoresFromFrame(d._1, d._2))
-//    Can below use reduceLeft?
     individualFrameScores.foldLeft(List.empty[Option[Int]])((acc, d) => {
       if (acc.isEmpty) List(d) else {
         val lastFrameScore = for {
