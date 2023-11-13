@@ -1,0 +1,22 @@
+{
+  "name": "bowling",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/drewmiley/bowling.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/drewmiley/bowling/issues"
+  },
+  "homepage": "https://github.com/drewmiley/bowling#readme",
+  "devDependencies": {
+    "jest": "^29.7.0"
+  }
+}
